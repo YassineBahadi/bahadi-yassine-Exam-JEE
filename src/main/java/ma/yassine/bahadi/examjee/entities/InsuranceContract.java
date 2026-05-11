@@ -15,9 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-@Builder
 public abstract class InsuranceContract {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
