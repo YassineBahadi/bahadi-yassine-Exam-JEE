@@ -1,9 +1,6 @@
 package ma.yassine.bahadi.examjee.dtos;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import ma.yassine.bahadi.examjee.enums.HousingType;
 
 /**
@@ -13,6 +10,7 @@ import ma.yassine.bahadi.examjee.enums.HousingType;
 @NoArgsConstructor
 @Getter
 @Setter
+@Builder
 public class HomeContractDTO extends InsuranceContractDTO {
     private HousingType housingType;
 

@@ -4,10 +4,12 @@ import ma.yassine.bahadi.examjee.dtos.ClientDTO;
 import ma.yassine.bahadi.examjee.dtos.PaymentDTO;
 import ma.yassine.bahadi.examjee.entities.Client;
 import ma.yassine.bahadi.examjee.entities.Payment;
+import org.springframework.stereotype.Service;
 
 /**
  * @author pc
  **/
+@Service
 public class InsuranceMapper {
     public ClientDTO fromClient(Client client) {
 
