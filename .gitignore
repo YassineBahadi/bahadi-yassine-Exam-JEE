@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+exam-front/node_modules
+exam-front/dist
+
