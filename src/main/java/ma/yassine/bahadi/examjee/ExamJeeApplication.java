@@ -6,12 +6,17 @@ import ma.yassine.bahadi.examjee.enums.HealthCoverageLevel;
 import ma.yassine.bahadi.examjee.enums.HousingType;
 import ma.yassine.bahadi.examjee.enums.PaymentType;
 import ma.yassine.bahadi.examjee.repositories.*;
+import ma.yassine.bahadi.examjee.security.entities.AppUser;
+import ma.yassine.bahadi.examjee.security.entities.RoleEntity;
+import ma.yassine.bahadi.examjee.security.repositories.AppUserRepository;
+import ma.yassine.bahadi.examjee.security.repositories.RoleRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 //import org.springframework.boot.security.autoconfigure.SecurityAutoConfiguration;
 //@SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
@@ -20,6 +25,40 @@ public class ExamJeeApplication {
     public static void main(String[] args) {
         SpringApplication.run(ExamJeeApplication.class, args);
     }
+
+    @Bean
+    CommandLineRunner initSecurity(
+            AppUserRepository userRepo,
+            RoleRepository roleRepo
+    ) {
+
+        return args -> {
+
+            RoleEntity adminRole = roleRepo.save(
+                    RoleEntity.builder().roleName("ROLE_ADMIN").build()
+            );
+
+            RoleEntity clientRole = roleRepo.save(
+                    RoleEntity.builder().roleName("ROLE_CLIENT").build()
+            );
+
+            AppUser admin = AppUser.builder()
+                    .username("admin")
+                    .password("{noop}1234")
+                    .roles(Set.of(adminRole))
+                    .build();
+
+            AppUser client = AppUser.builder()
+                    .username("client")
+                    .password("{noop}1234")
+                    .roles(Set.of(clientRole))
+                    .build();
+
+            userRepo.save(admin);
+            userRepo.save(client);
+        };
+    }
+
     @Bean
     CommandLineRunner start(
             ClientRepository clientRepository,

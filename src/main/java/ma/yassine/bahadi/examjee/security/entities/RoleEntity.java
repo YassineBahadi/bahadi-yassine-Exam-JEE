@@ -3,8 +3,6 @@ package ma.yassine.bahadi.examjee.security.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Set;
-
 /**
  * @author pc
  **/
@@ -14,15 +12,11 @@ import java.util.Set;
 @Getter
 @Setter
 @Builder
-public class AppUser {
+public class RoleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String username;
-
-    private String password;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Set<RoleEntity> roles;
+    @Column(unique = true)
+    private String roleName;
 }
